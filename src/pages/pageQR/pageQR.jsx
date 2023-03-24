@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { mdiArrowLeftBoldCircleOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import QRCodeLink from 'qrcode';
+import history from '../../hitory';
 
 import { GeneratorQr } from "../../components/qrCodeGenerate/QRGenerate";
 import { ContextApi } from "../../contexts/contextApi";
@@ -10,10 +11,13 @@ import ToastAlert from "../../libs/alert/alertSucess";
 
 import styles from './styles.module.scss';
 
-let dataProfile;
 export function PageQR() {
     const { dataQrCode } = useParams();
-    let navigate = useNavigate();
+    var browserHistory = history;
+    const goBack = () => {
+        browserHistory.replace('/')
+        browserHistory.go()
+    }
     const { 
         getDataQrCode,
         dataToQgCode
@@ -25,7 +29,7 @@ export function PageQR() {
     }, [dataQrCode])
 
     useEffect(() => {
-        handleDownload(`http://localhost:3000/profile/?${dataToQgCode[0]?.id}`)
+        handleDownload(`https://test-buzzvel.vercel.app//profile/?${dataToQgCode[0]?.id}`)
     }, [dataToQgCode])
 
     function handleDownload(link_url) {
@@ -41,7 +45,7 @@ export function PageQR() {
         <div className={styles.containerQRcode}>
             <div 
             className={styles.BTNReturn}
-            onClick={() => navigate('/')}
+            onClick={() => goBack()}
             >
                 <Icon path={mdiArrowLeftBoldCircleOutline}
                   title="return"
@@ -57,7 +61,7 @@ export function PageQR() {
                 <div className={styles.boxCode}>
                     <p>Scan me to see my profile</p>
                     <GeneratorQr 
-                    value={`http://localhost:3000/profile/?${dataToQgCode[0]?.id}`}
+                    value={`https://test-buzzvel.vercel.app//profile/?${dataToQgCode[0]?.id}`}
                     />
                     <a
                     className={styles.BTNDownload} 

@@ -24,7 +24,6 @@ export function ContextProvider({ children }) {
             handleOpenAlert('success', 'Your data has been saved!');
         } else {
             handleOpenAlert('error');
-            console.log('innerErro', error)
         }
     }
 
@@ -40,7 +39,6 @@ export function ContextProvider({ children }) {
             }
         } catch (error) {
             if (error) {
-                console.log('getDataError', error)
                 handleOpenAlert('error', 'Error fetching data from QR Code');
             }
         }

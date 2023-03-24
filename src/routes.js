@@ -21,6 +21,7 @@ export default function RoutesApp() {
             element={<PageQR />}
             />
             <Route 
+            exact
             path='/profile'
             element={<ProfilePage />}
             />
