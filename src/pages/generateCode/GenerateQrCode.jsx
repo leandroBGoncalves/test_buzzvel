@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Inputs } from "../../components/inputs/inputs";
 import { ContextApi } from "../../contexts/contextApi";
-import ToastAlert from "../../libs/alert/alert";
+import ToastAlert from "../../libs/alert/alertSucess";
 
 import styles from './styles.module.scss';
 
@@ -11,7 +11,7 @@ export function GenerateQrCodePage() {
     let navigate = useNavigate()
     const { 
         innerDataQrCode, 
-        responseQrGenerate
+        responseQrGenerate,
     } = useContext(ContextApi)
     const [name, setName] = useState('');
     const [linkedin, setLinkedin] = useState('');
@@ -68,10 +68,8 @@ export function GenerateQrCodePage() {
                 </div>
             </div>
             <ToastAlert 
-            message='Your data has been saved!'
             vertical='top'
             horizontal='center'
-            type='success'
             />
         </div>
     )

@@ -44,3 +44,21 @@
         font: 500 1.5rem 'Roboto', sans-serif;
     }
 }
+
+.BTNReturn {
+    width: 3rem;
+    height: 20rem;
+    background-color: var(--cyan-500);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 0 8px 8px 0;
+    padding: 3px;
+    cursor: pointer;
+
+    p {
+        transform: rotate(270deg);
+        font: 500 1.2rem 'Roboto', sans-serif;
+    }
+}

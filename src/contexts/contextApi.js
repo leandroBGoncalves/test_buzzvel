@@ -7,7 +7,11 @@ export const ContextApi = createContext({});
 export function ContextProvider({ children }) {
     const [responseQrGenerate, setResponseQrGenerate] = useState([]);
     const [dataToQgCode, setDataToQgCode] = useState([]);
-    const [openAlert, setOpenAlert] = useState(false);
+    const [openAlert, setOpenAlert] = useState({
+        active: false,
+        type: '',
+        message: ''
+    });
 
     async function innerDataQrCode(body) {
         const { data, error } = await supabase
@@ -17,32 +21,37 @@ export function ContextProvider({ children }) {
 
         if (!error) {
             setResponseQrGenerate(data);
-            handleOpenAlert();
+            handleOpenAlert('success', 'Your data has been saved!');
         } else {
-            window.alert(error)
-            console.log(error)
+            handleOpenAlert('error');
+            console.log('innerErro', error)
         }
     }
 
     async function getDataQrCode(id) {
-        const { data, error } = await supabase
+        try {
+            const { data, error } = await supabase
             .from('data-qrcode')
             .select("*")
             .eq('id', id)
 
-        if (data) {
-            setDataToQgCode(data);
-            console.log('getData', data)
-        }
-
-        if (error || !data) {
-            console.log('getDataError', error)
-            handleOpenAlert();
+            if (data) {
+                setDataToQgCode(data);
+            }
+        } catch (error) {
+            if (error) {
+                console.log('getDataError', error)
+                handleOpenAlert('error', 'Error fetching data from QR Code');
+            }
         }
     }
 
-    function handleOpenAlert() {
-        setOpenAlert(true)
+    function handleOpenAlert(params, message) {
+            setOpenAlert({
+                active: true,
+                type: params,
+                message: message
+            })
     }
 
     const handleCloseAlert = (event, reason) => {
@@ -50,7 +59,10 @@ export function ContextProvider({ children }) {
           return;
         }
     
-        setOpenAlert(false);
+        setOpenAlert({
+            active: false,
+            type: ''
+        });
       };
     return (
         <ContextApi.Provider value={{

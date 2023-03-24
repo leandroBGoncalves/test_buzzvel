@@ -3,7 +3,6 @@ import QRCode from "react-qr-code";
 import styles from './styles.module.scss';
 
 export function GeneratorQr({ value }) {
-    console.log('GeneratorQr', value)
     return (
         <div className={styles.QRCode}>
             <QRCode
