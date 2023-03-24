@@ -29,7 +29,7 @@ export function PageQR() {
     }, [dataQrCode])
 
     useEffect(() => {
-        handleDownload(`https://test-buzzvel.vercel.app//profile/?${dataToQgCode[0]?.id}`)
+        handleDownload(`https://test-buzzvel.vercel.app/profile/?${dataToQgCode[0]?.id}`)
     }, [dataToQgCode])
 
     function handleDownload(link_url) {
@@ -61,7 +61,7 @@ export function PageQR() {
                 <div className={styles.boxCode}>
                     <p>Scan me to see my profile</p>
                     <GeneratorQr 
-                    value={`https://test-buzzvel.vercel.app//profile/?${dataToQgCode[0]?.id}`}
+                    value={`https://test-buzzvel.vercel.app/profile/?${dataToQgCode[0]?.id}`}
                     />
                     <a
                     className={styles.BTNDownload} 
